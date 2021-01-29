@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style>
+@import url('http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300,400,600');
+body{padding:30px;margin:0;}
+*{box-sizing:border-box;}
+ul {
+  list-style: none;
+  padding: 0;
+}
+.catInner {
+  overflow: hidden;
+  display: none;
+}
+ul li {
+  margin: 0 0 3px 0;
+}
+.ListAccordion a {
+  display: block;
+  background: #fff;
+  color: #333;
+  padding:0 10px;
+  height:50px;
+  font:400 16px/50px Verdana, Geneva, sans-serif;
+  border:1px solid #ebebeb;
+  transition: background .3s ease;
+}
+.ListAccordion .listing.active > a{background:#ccc;}
+.ListAccordion .listingSub.active > a{background:#FCC;}
+
+
+.ListAccordion ul .catInner.show{background:#CCC;}
+.ListAccordion li{position:relative;}
+.clickDiv{position:absolute;width:25px;height:25px;right:10px;top:10px;background:red;border-radius: 50%;}
+.ListAccordion .listing.active > .clickDiv{background: darkmagenta;}
+.ListAccordion .listingSub.active > .clickDiv{background: midnightblue;}
+
+</style>
+</head>
+
+<body>
+<ul class="ListAccordion">
+  <li class="listing">
+    <a class="toggle" href="javascript:void(0);">Item 1</a>
+    <span class="clickDiv"></span>
+    <ul class="catInner">
+      <li>Option 1</li>
+      <li>Option 2</li>
+      <li>Option 3</li>
+    </ul>
+  </li>
+  
+  <li class="listing">
+    <a class="toggle" href="javascript:void(0);">Item 2</a>
+    <span class="clickDiv"></span>
+    <ul class="catInner">
+      <li>Option 1</li>
+      <li>Option 2</li>
+      <li>Option 3</li>
+    </ul>
+  </li>
+  
+  <li class="listing">
+    <a class="toggle" href="javascript:void(0);">Item 3</a>
+    <span class="clickDiv"></span>
+    <ul class="catInner">
+      <li class="listingSub">
+        <a href="#" class="toggle">Open catInner</a>
+        <span class="clickDiv"></span>
+        <div class="catInner">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tempus placerat fringilla. Duis a elit et dolor laoreet volutpat. Aliquam ultrices mauris id mattis imperdiet. Aenean cursus ultrices justo et varius. Suspendisse aliquam orci id dui dapibus
+            blandit. In hac habitasse platea dictumst. Sed risus velit, pellentesque eu enim ac, ultricies pretium felis.
+          </p>
+        </div>
+      </li>
+      
+      <li class="listingSub">
+        <a href="#" class="toggle">Open catInner #2</a>
+        <span class="clickDiv"></span>
+        <div class="catInner">
+          <p>
+            Children will automatically close upon closing its parent.
+          </p>
+        </div>
+      </li>
+      
+      <li>Option 3</li>
+    </ul>
+  </li>
+  
+  <li class="listing">
+    <a class="toggle" href="javascript:void(0);">Item 4</a>
+    <span class="clickDiv"></span>
+    <ul class="catInner">
+       <li class="listingSub">
+        <a href="#" class="toggle">Technically any number of nested elements</a>
+        <span class="clickDiv"></span>
+        <ul class="catInner">
+          <li>
+            <a href="#" class="toggle">Another nested element</a>
+            <span class="clickDiv"></span>
+            <div class="catInner">
+              <p>
+                As long as the catInner element has catInner as one of its classes then it will be toggled.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tempus placerat fringilla. Duis a elit et dolor laoreet volutpat. Aliquam ultrices mauris id mattis imperdiet. Aenean cursus ultrices justo et varius. Suspendisse aliquam orci id dui dapibus
+                blandit. In hac habitasse platea dictumst. Sed risus velit, pellentesque eu enim ac, ultricies pretium felis.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </li>
+      
+      <li>Option 2</li>
+      
+      <li>Option 3</li>
+    </ul>
+  </li>
+</ul>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+//$('.clickDiv').click(function(e) {
+//  	e.preventDefault();
+//  
+//    var $this = $(this);
+//  
+//    if ($this.next().hasClass('show')) {
+//        $this.next().removeClass('show');
+//        $this.next().slideUp(350);
+//		
+//    } else {
+//        $this.parent().parent().find('li .catInner').removeClass('show');
+//        $this.parent().parent().find('li .catInner').slideUp(350);
+//        $this.next().toggleClass('show');
+//        $this.next().slideToggle(350);
+//		
+//    }
+//});
+$('.clickDiv').click(function(e) {
+  	e.preventDefault();
+    var $this = $(this);
+	if($this.parent(".listing,.listingSub").hasClass("active")){
+		$this.parent(".listing,.listingSub").removeClass("active");
+		
+	}else{
+		$(".listing,.listingSub").removeClass("active");
+		if($this.hasClass("listing,listingSub")){
+			$this.addClass("active");
+		}else{
+			$this.parents(".listing,.listingSub").addClass("active")
+		}
+	}
+    if ($this.next().hasClass('show')) {
+        $this.next().removeClass('show');
+        $this.next().slideUp(350);
+	 } else {
+        $this.parent().parent().find('li .catInner').removeClass('show');
+        $this.parent().parent().find('li .catInner').slideUp(350);
+        $this.next().toggleClass('show');
+        $this.next().slideToggle(350);
+		
+		
+    }
+});
+
+});
+</script>
+</body>
+</html>

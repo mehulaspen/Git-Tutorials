@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>scoller</title>
+<style>.show{width:400px; margin:0px auto;}
+.morectnt span {display: none;}</style>
+</head>
+
+<body>
+<div class="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna tellus, vulputate in feugiat vel, auctor at ipsum. Curabitur imperdiet orci eget congue malesuada. Vestibulum gravida mi sed facilisis elementum. Phasellus sed eros nulla. Proin porta aliquam tristique. Suspendisse tincidunt augue eget nulla luctus porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna tellus, vulputate in feugiat vel, auctor at ipsum. Curabitur <a href="#">imperdiet orci eget congue malesuada.</a> <p>Vestibulum gravida mi sed facilisis elementum. Phasellus sed eros nulla. Proin porta aliquam tristique. Suspendisse tincidunt augue eget nulla</p><p>
+Vestibulum gravida mi sed facilisis elementum. Phasellus sed eros nulla. Proin porta aliquam tristique. Suspendisse tincidunt augue eget nulla</p>
+ luctus porta.<p>
+ Vestibulum gravida mi sed facilisis elementum. Phasellus sed eros nulla. Proin porta aliquam tristique. Suspendisse tincidunt augue eget nulla</p>
+ </div>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script>
+  $(function() {
+var showTotalChar = 500, showChar = "Show (+)", hideChar = "Hide (-)";
+$('.show').each(function() {
+var content = $(this).text();
+if (content.length > showTotalChar) {
+var con = content.substr(0, showTotalChar);
+var hcon = content.substr(showTotalChar, content.length - showTotalChar);
+var txt= con +  '<span class="dots">...</span><span class="morectnt"><span>' + hcon + '</span>&nbsp;&nbsp;<a href="" class="showmoretxt">' + showChar + '</a></span>';
+$(this).html(txt);
+}
+});
+$(".showmoretxt").click(function() {
+if ($(this).hasClass("sample")) {
+$(this).removeClass("sample");
+$(this).text(showChar);
+} else {
+$(this).addClass("sample");
+$(this).text(hideChar);
+}
+$(this).parent().prev().toggle();
+$(this).prev().toggle();
+return false;
+});
+});
+	</script>
+
+</body>
+</html>
